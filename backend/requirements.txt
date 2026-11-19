@@ -1,0 +1,5 @@
+fastapi==0.115.12
+uvicorn==0.34.2
+chromadb==1.5.9
+tensorflow-cpu==2.16.2
+numpy>=1.26,<2.0

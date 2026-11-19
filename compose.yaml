@@ -1,0 +1,44 @@
+services:
+  chroma:
+    image: docker.io/chromadb/chroma:1.5.9
+    environment:
+      CHROMA_PERSIST_PATH: /data
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - chroma-data:/data
+    restart: unless-stopped
+  api:
+    build:
+      context: ./backend
+    environment:
+      PORT: "3001"
+      CHROMA_URL: http://chroma:8000
+      DB_PATH: /app/data/ecommerce.sqlite
+      MODEL_PATH: /app/data/neural-model.keras
+      TF_CPP_MIN_LOG_LEVEL: "2"
+      CUDA_VISIBLE_DEVICES: "-1"
+      OMP_NUM_THREADS: "2"
+      TF_NUM_INTRAOP_THREADS: "2"
+      TF_NUM_INTEROP_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+    ports:
+      - "127.0.0.1:3001:3001"
+    volumes:
+      - sqlite-data:/app/data
+    depends_on:
+      - chroma
+    restart: unless-stopped
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+volumes:
+  chroma-data:
+  sqlite-data:

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Laboratório híbrido com TensorFlow / Keras, Node.js e ChromaDB">
+  <title>VectorShop | TensorFlow / Keras + ChromaDB</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/" aria-label="VectorShop início"><span class="brand-icon">◇</span> Vector<span>Shop</span></a>
+    <span class="top-label">LABORATÓRIO DE IA · PYTHON + CHROMADB + KERAS</span>
+    <div class="health" id="health"><span class="dot"></span> Conectando...</div>
+  </div>
+</header>
+<main class="container">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">RECUPERAÇÃO VETORIAL + RANQUEAMENTO NEURAL</div>
+      <h1>Busca vetorial com <em>aprendizado neural.</em></h1>
+      <p>ChromaDB recupera candidatos e TensorFlow / Keras ranqueia com rede neural 128 → 64 → 32 → 1. Simule compras e retreine o modelo.</p>
+      <div class="chips"><span>Python 3.11</span><span>MVC</span><span>SQLite</span><span>ChromaDB</span><span>13 dimensões vetoriais</span><span>TensorFlow / Keras</span><span>100 épocas</span></div>
+    </div>
+    <div class="hero-visual" aria-hidden="true"><div class="orb">◈</div><div class="mini">VECTOR SPACE<br><strong>COSINE SIMILARITY</strong><br>13 DIMENSIONS</div></div>
+  </section>
+
+  <section class="workspace">
+    <aside class="panel sidebar">
+      <div class="panel-header"><span class="section-num">01</span><h2>Perfil do cliente</h2></div>
+      <label for="userSelect">Selecionar usuário</label>
+      <select id="userSelect" aria-label="Selecionar usuário" disabled><option>Carregando...</option></select>
+      <div class="profile-card"><div class="avatar" id="userAvatar">?</div><div><strong id="userName">Selecione um usuário</strong><div class="subtle" id="userAge">—</div></div></div>
+      <div class="panel-heading"><h3>Histórico de compras</h3><span class="counter" id="purchaseCount">0</span></div>
+      <div id="purchases" class="purchase-list"><p class="placeholder">Nenhuma compra registrada</p></div>
+      <div class="info-note"><strong>Como funciona?</strong> O ChromaDB recupera produtos semelhantes; o TensorFlow / Keras classifica os candidatos com pesos treinados. Novas compras entram no próximo retreinamento.</div>
+    </aside>
+
+    <section class="content">
+      <div class="panel recommend-panel">
+        <div class="panel-header"><span class="section-num">02</span><h2>Recomendados para você</h2><button id="refresh" class="button secondary">↻ Atualizar</button></div>
+        <div class="model-controls" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0">
+          <label for="modeSelect">Modo</label>
+          <select id="modeSelect"><option value="hybrid">Híbrido (Chroma + Neural)</option><option value="vector">Somente ChromaDB</option><option value="neural">Somente rede neural</option></select>
+          <button id="train" class="button secondary">Treinar 100 épocas</button>
+          <span id="modelStatus" class="subtle">Carregando modelo...</span>
+        </div>
+        <details style="margin:10px 0"><summary>Histórico de treinamento (loss / accuracy)</summary><pre id="trainingHistory" style="white-space:pre-wrap;max-height:250px;overflow:auto"></pre></details>
+        <p id="recExplanation" class="subtle">Escolha um usuário para começar.</p>
+        <div id="recommendations" class="recommendations"><p class="placeholder">Carregando recomendações...</p></div>
+      </div>
+      <div class="catalog-header"><div><span class="section-num">03</span><h2>Catálogo de produtos</h2></div><div class="subtle" id="productCount"></div></div>
+      <div id="products" class="product-grid"><p class="placeholder">Carregando produtos...</p></div>
+    </section>
+  </section>
+  <div id="message" role="status" aria-live="polite" class="toast" hidden></div>
+</main>
+<footer><span>VectorShop · Demonstração educacional de recuperação vetorial + rede neural</span><span>TensorFlow / Keras treinado em processo separado; sem LLM</span></footer>
+<script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+@base = http://localhost:3001/api
+GET {{base}}/health
+###
+GET {{base}}/users
+###
+GET {{base}}/products
+###
+GET {{base}}/users/1/recommendations?mode=vector&limit=5
+###
+GET {{base}}/users/1/recommendations?mode=neural&limit=5
+###
+GET {{base}}/users/1/recommendations?mode=hybrid&limit=5
+###
+GET {{base}}/model/status
+###
+POST {{base}}/model/train
+Content-Type: application/json
+
+{"epochs":100}
+###
+POST {{base}}/users/99/purchases
+Content-Type: application/json
+
+{"productId":7}
+###
+DELETE {{base}}/users/99/purchases/7
